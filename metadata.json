@@ -1,9 +1,9 @@
 {
-    "Identifier": "",
-    "Slug": "",
-    "Status": "",
-    "Title": "",
-    "Description": "",
+    "Identifier": "eos694w",
+    "Slug": "reinvent4-mol2mol-medium-similarity",
+    "Status": "In progress",
+    "Title": "REINVENT 4 Mol2MolMediumSimilarity",
+    "Description": "The Mol2MolMediumSimilarity model is one of the models within REINVENT 4 used to find new molecules similar to the provided molecules.",
     "Mode": "",
     "Task": [],
     "Input": [],
@@ -12,8 +12,8 @@
     "Output Type": [],
     "Output Shape": "",
     "Interpretation": "",
-    "Tag": [],
-    "Publication": "",
-    "Source Code": "",
-    "License": ""
+    "Tag": "Similarity",
+    "Publication": "https://chemrxiv.org/engage/chemrxiv/article-details/65463cafc573f893f1cae33a",
+    "Source Code": "https://github.com/MolecularAI/REINVENT4",
+    "License": "Apache License 2.0"
 }
