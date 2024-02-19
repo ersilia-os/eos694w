@@ -4,13 +4,21 @@
     "Status": "In progress",
     "Title": "REINVENT 4 Mol2MolMediumSimilarity",
     "Description": "The Mol2MolMediumSimilarity model is one of the models within REINVENT 4 used to find new molecules similar to the provided molecules.",
-    "Mode": "",
-    "Task": [],
-    "Input": [],
-    "Input Shape": "",
-    "Output": [],
-    "Output Type": [],
-    "Output Shape": "",
+    "Mode": "Pretrained",
+    "Task": [
+        "Generative"
+    ],
+    "Input": [
+        "Compound"
+    ],
+    "Input Shape": "List",
+    "Output": [
+        "Compound"
+    ],
+    "Output Type": [
+        "String"
+    ],
+    "Output Shape": "List",
     "Interpretation": "",
     "Tag": "Similarity",
     "Publication": "https://chemrxiv.org/engage/chemrxiv/article-details/65463cafc573f893f1cae33a",
