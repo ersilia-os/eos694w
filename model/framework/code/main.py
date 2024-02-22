@@ -34,7 +34,7 @@ def my_model():
         "parameters": {
             "model_file": MODEL,
             "unique_molecules": True,
-            "num_smiles": 10,
+            "num_smiles": 100,
             "output_file": output_file,
             "smiles_file": input_file,
             "sample_strategy": "beamsearch",
