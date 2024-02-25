@@ -2,6 +2,7 @@ import sys
 import os
 import time
 import csv
+import json
 
 import click
 import torch
@@ -18,11 +19,8 @@ from setup_sampler import setup_sampler
 # parse arguments
 input_file = sys.argv[1]
 output_file = sys.argv[2]
-
-is_debug = False
-
-if __name__ == "__main__":
-    is_debug = True
+is_debug = sys.argv[3] == "True" if len(sys.argv) > 3 else False
+log_file = output_file + ".json"
 
 
 def sort_sampled_molecules(
@@ -70,10 +68,17 @@ def filter_out_duplicate_molecules(sampled: SampleBatch) -> SampleBatch:
         range(len(sampled.items1)),
         sampled.states,
     ):
+        seen[item1] = item1
+
         if smile in seen:
+            if is_debug:
+                click.echo(
+                    click.style(
+                        f"Removing {smile}, as it is a duplicate entry.", fg="yellow"
+                    )
+                )
             continue
 
-        seen[item1] = item1
         seen[smile] = smile
 
         items1.append(item1)
@@ -93,7 +98,7 @@ def filter_out_duplicate_molecules(sampled: SampleBatch) -> SampleBatch:
 
 # my model
 def my_model():
-    batch_size = 2
+    batch_size = 100
     chemistry = ChemistryHelpers(Conversions(), BondMaker(), AttachmentPoints())
     sampler = setup_sampler(batch_size=batch_size, chemistry=chemistry)
 
@@ -162,7 +167,21 @@ def my_model():
 
     with open(output_file, "w", newline="") as fp:
         csv_writer = csv.writer(fp)
+        # First Row: Header
+        # Second Row: Generated Smiles (Output)
+        # Third Row: Input Smiles
         csv_writer.writerows([HEADER, sampled.smilies, sampled.items1])
+
+    with open(os.path.abspath(log_file), "w", newline="\n") as fp:
+        log = {
+            "start": start_time,
+            "end": end_time,
+            "input_smiles": num_input_smiles,
+            "total": total_smiles,
+            "expected": expected_num_smiles,
+        }
+
+        json.dump(log, fp)
 
 
 # run model
