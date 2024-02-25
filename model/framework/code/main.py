@@ -145,7 +145,7 @@ def my_model():
     # compute Tanimoto similarity between generated compounds and input compounds; return largest
     _, valid_idxs = chemistry.conversions.smiles_to_mols_and_indices(sampled.items2)
     valid_scores = sampler.calculate_tanimoto(input_smiles, sampled.items2)
-    scores = [None] * len(sampled.items2)
+    scores = [-1] * len(sampled.items2)
     for i, j in enumerate(valid_idxs):
         scores[j] = valid_scores[i]
 
