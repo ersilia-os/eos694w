@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import csv
 import os
 import numpy as np
+import json
 
 
 def molecule_from_smiles_img(smile):
@@ -12,7 +13,6 @@ def molecule_from_smiles_img(smile):
 def read_molecule(input_path):
     with open(input_path) as fp:
         smi = fp.read()
-        smi = rdkit.Chem.Draw.MolToImage(rdkit.Chem.MolFromSmiles(smi))
         return smi
 
 
@@ -30,12 +30,27 @@ def visualize_random_output_molecules(output_smiles_path):
 
     visited_input_smiles = {}
 
-    inputs = np.array(rows[1])
+    inputs = []
+
+    with open(f"{output_smiles_path}.json") as logfile:
+        log = json.load(logfile)
+        batch_length = log["expected"] // len(log["input_smiles"])
+
+        for smile in log["input_smiles"]:
+            smiles = [smile] * batch_length
+            inputs.extend(smiles)
+
+    inputs = np.array(inputs)
     outputs = np.array(rows[0])
 
     perm = np.random.permutation(len(inputs))
 
+    image_output_dir = os.path.dirname(output_smiles_path)
+
     for input_smile, output_smile in zip(inputs[perm], outputs[perm]):
+        if not output_smile:
+            continue
+
         current_input_smile = input_smile
 
         if current_input_smile in visited_input_smiles:
@@ -63,7 +78,7 @@ def visualize_random_output_molecules(output_smiles_path):
         axs[1].axis("off")  # Hide axes
 
         plt.savefig(
-            os.path.join(output_smiles_path, "..", output_smile),
+            os.path.join(image_output_dir, output_smile),
             dpi=300,
             bbox_inches="tight",
         )
