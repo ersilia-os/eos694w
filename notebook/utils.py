@@ -4,6 +4,11 @@ import csv
 import os
 import numpy as np
 import json
+import unicodedata
+import string
+
+valid_filename_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
+char_limit = 255
 
 
 def molecule_from_smiles_img(smile):
@@ -14,6 +19,22 @@ def read_molecule(input_path):
     with open(input_path) as fp:
         smi = fp.read()
         return smi
+
+
+def clean_filename(filename, whitelist=valid_filename_chars, replace="-"):
+    # replace spaces
+    for r in replace:
+        filename = filename.replace(r, "_")
+
+    # keep only valid ascii chars
+    cleaned_filename = (
+        unicodedata.normalize("NFKD", filename).encode("ASCII", "ignore").decode()
+    )
+
+    # keep only whitelisted chars
+    cleaned_filename = "".join(c for c in cleaned_filename if c in whitelist)
+
+    return cleaned_filename[:char_limit]
 
 
 def visualize_random_output_molecules(output_smiles_path):
@@ -78,7 +99,7 @@ def visualize_random_output_molecules(output_smiles_path):
         axs[1].axis("off")  # Hide axes
 
         plt.savefig(
-            os.path.join(image_output_dir, output_smile),
+            os.path.join(image_output_dir, clean_filename(output_smile)),
             dpi=300,
             bbox_inches="tight",
         )
