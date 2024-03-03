@@ -27,9 +27,9 @@ def are_smiles_same(smiles1, smiles2):
 
 
 def sort_sampled_molecules(
-    sampled: SampleBatch, scores: "list[float]"
-) -> "tuple[SampleBatch, list[float]]":
-    """Sort sampled molecules using tanimoto in descending order."""
+    sampled: SampleBatch, scores: list[float]
+) -> tuple[SampleBatch, list[float]]:
+    """Sort sampled molecules using Tanimoto in descending order."""
     items1 = np.array(sampled.items1)
     items2 = np.array(sampled.items2)
     smilies = np.array(sampled.smilies)
@@ -39,14 +39,14 @@ def sort_sampled_molecules(
     sorted_indices = np.argsort(_scores)[::-1]
 
     sampled_batch = SampleBatch(
-        items1=list(items1[sorted_indices]),
-        items2=list(items2[sorted_indices]),
+        items1=items1[sorted_indices].tolist(),
+        items2=items2[sorted_indices].tolist(),
         nlls=sampled.nlls[sorted_indices.copy()],
-        smilies=list(smilies[sorted_indices]),
-        states=list(states[sorted_indices]),
+        smilies=smilies[sorted_indices].tolist(),
+        states=states[sorted_indices].tolist(),
     )
 
-    return sampled_batch, list(_scores[sorted_indices])
+    return sampled_batch, _scores[sorted_indices].tolist()
 
 
 def filter_out_duplicate_molecules(sampled: SampleBatch, is_debug: bool) -> SampleBatch:
