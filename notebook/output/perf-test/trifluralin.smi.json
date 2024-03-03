@@ -1,1 +1,0 @@
-{"start": 1709462269.8319535, "end": 1709462314.9152956, "input_smiles": ["CCCN(CCC)c1c(cc(cc1[N+]([O-])=O)C(F)(F)F)[N+]([O-])=O"], "total": 97, "expected": 100}
