@@ -1,3 +1,4 @@
+# imports
 import sys
 import os
 import time
@@ -18,7 +19,13 @@ from utils import sort_sampled_molecules, filter_out_duplicate_molecules, pad_sm
 # parse arguments
 input_file = sys.argv[1]
 output_file = sys.argv[2]
+
+# This arguments is reserved for testing or
+# running model locally or in notebook.
 is_debug = sys.argv[3] == "True" if len(sys.argv) > 3 else False
+
+# Name of the log file.
+# Only write if `is_debug` is True.
 log_file = output_file + ".json"
 
 
@@ -100,16 +107,17 @@ def my_model():
         # Second Row: Generated Smiles (Output)
         csv_writer.writerows([HEADER, output_smiles])
 
-    with open(os.path.abspath(log_file), "w", newline="\n") as fp:
-        log = {
-            "start": start_time,
-            "end": end_time,
-            "input_smiles": input_smiles,
-            "total": total_smiles,
-            "expected": expected_num_smiles,
-        }
+    if is_debug:
+        with open(os.path.abspath(log_file), "w", newline="\n") as fp:
+            log = {
+                "start": start_time,
+                "end": end_time,
+                "input_smiles": input_smiles,
+                "total": total_smiles,
+                "expected": expected_num_smiles,
+            }
 
-        json.dump(log, fp)
+            json.dump(log, fp)
 
 
 # run model
