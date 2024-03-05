@@ -98,8 +98,9 @@ class Mol2MolSimilaritySampler:
 
         total_smiles = len(sampled.smilies)
 
+        expected_num_smiles = self.batch_size * num_input_smiles
+
         if is_debug:
-            expected_num_smiles = self.batch_size * num_input_smiles
             click.echo(
                 click.style(
                     f"Total unique smiles generated: {total_smiles}, Expected: {expected_num_smiles}, Loss: {expected_num_smiles - total_smiles}"
