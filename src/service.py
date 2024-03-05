@@ -68,6 +68,7 @@ class Model(object):
         output_file = os.path.join(tmp_folder, self.OUTPUT_FILE)
         log_file = os.path.join(tmp_folder, self.LOG_FILE)
         with open(data_file, "w") as f:
+            f.write("input" + os.linesep)
             for inp in input_list:
                 f.write(inp + os.linesep)
         run_file = os.path.join(tmp_folder, self.RUN_FILE)
