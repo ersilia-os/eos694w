@@ -28,7 +28,8 @@ input_smiles = None
 
 
 if os.path.exists(input_file):
-    input_smiles = read_smiles_csv_file(input_file, columns=0)
+    input_smiles = read_smiles_csv_file(input_file, columns=0, header=True)
+    num_input_smiles = len(input_smiles)
 
 else:
     click.echo(click.style(f"[INPUT_FILE]: {input_file} doesn't exist.", fg="red"))
