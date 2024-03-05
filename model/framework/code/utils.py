@@ -152,3 +152,25 @@ def pad_smiles(
             output.extend(padding)
 
     return output
+
+
+def make_list_into_lists_of_n(lst: "list[str]", n: int) -> "list[list[str]]":
+    """This function splits a list into n parts of equal size."""
+
+    length = len(lst)
+
+    if length % n != 0:
+        # If length is not divisible by n, then
+        # We don't have expected output.
+        # Hence throwing error.
+        raise Exception(f"{length} is not divisible by {n}")
+
+    part_length = length // n
+
+    output = []
+
+    for start in range(0, length, part_length):
+        end = start + part_length
+        output.append(lst[start:end])
+
+    return output
