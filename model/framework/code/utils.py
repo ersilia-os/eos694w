@@ -5,7 +5,7 @@ from rdkit import Chem, DataStructs
 from rdkit.Chem import AllChem
 
 
-def are_smiles_same(smiles1, smiles2):
+def are_smiles_same(smiles1: str, smiles2: str) -> bool:
     """To check whether given smiles are same."""
     # Parse SMILES strings to obtain RDKit molecule objects
     mol1 = Chem.MolFromSmiles(smiles1)
@@ -20,8 +20,10 @@ def are_smiles_same(smiles1, smiles2):
     fp2 = AllChem.GetMorganFingerprint(mol2, 2)
 
     # Compare fingerprints to assess similarity
-    similarity = DataStructs.TanimotoSimilarity(fp1, fp2)
-
+    try:
+        similarity = float(DataStructs.TanimotoSimilarity(fp1, fp2))
+    except ValueError:
+        similarity = -1
     # Determine whether the molecules are considered the same
     return similarity == 1.0
 
