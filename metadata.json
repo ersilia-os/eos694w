@@ -3,7 +3,7 @@
     "Slug": "reinvent4-mol2mol-medium-similarity",
     "Status": "In progress",
     "Title": "REINVENT 4 Mol2MolMediumSimilarity",
-    "Description": "The Mol2MolMediumSimilarity model is one of the models within REINVENT 4 used to find new molecules similar to the provided molecules.",
+    "Description": "The Mol2MolMediumSimilarity leverages REINVENT4's `mol2mol_medium_similarity.prior` to generate approximately 100 unique molecules. The generated molecules will be relatively similar to the input molecule.",
     "Mode": "Pretrained",
     "Task": [
         "Generative"
