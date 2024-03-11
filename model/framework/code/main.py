@@ -1,39 +1,68 @@
 # imports
+import sys
 import os
 import csv
-import sys
-from rdkit import Chem
-from rdkit.Chem.Descriptors import MolWt
+import json
+
+import click
+from reinvent.config_parse import read_smiles_csv_file
+
+from mol2mol_similarity_sampler import Mol2MolSimilaritySampler
 
 # parse arguments
 input_file = sys.argv[1]
 output_file = sys.argv[2]
 
-# current file directory
-root = os.path.dirname(os.path.abspath(__file__))
+# This arguments is reserved for testing or
+# running model locally or in notebook.
+is_debug = sys.argv[3] == "True" if len(sys.argv) > 3 else False
 
-# my model
-def my_model(smiles_list):
-    return [MolWt(Chem.MolFromSmiles(smi)) for smi in smiles_list]
+# Name of the log file.
+# Only write if `is_debug` is True.
+log_file = output_file + ".json"
 
 
-# read SMILES from .csv file, assuming one column with header
-with open(input_file, "r") as f:
-    reader = csv.reader(f)
-    next(reader)  # skip header
-    smiles_list = [r[0] for r in reader]
+batch_size = 100
+num_input_smiles = 0
+input_smiles = None
 
-# run model
-outputs = my_model(smiles_list)
 
-#check input and output have the same lenght
-input_len = len(smiles_list)
+if os.path.exists(input_file):
+    input_smiles = read_smiles_csv_file(input_file, columns=0, header=True)
+    num_input_smiles = len(input_smiles)
+
+else:
+    click.echo(click.style(f"[INPUT_FILE]: {input_file} doesn't exist.", fg="red"))
+
+
+if not os.path.exists(os.path.dirname(os.path.abspath(output_file))):
+    click.echo(
+        click.style(
+            f"[OUTPUT_DIR]: {os.path.dirname(output_file)} doesn't exist.", fg="red"
+        )
+    )
+
+mol2mol_similarity = Mol2MolSimilaritySampler()
+
+outputs, flatten_outputs, log = mol2mol_similarity.generate(
+    input_smiles=input_smiles, is_debug=is_debug
+)
+
+
+input_len = len(input_smiles)
 output_len = len(outputs)
 assert input_len == output_len
 
-# write output in a .csv file
-with open(output_file, "w") as f:
-    writer = csv.writer(f)
-    writer.writerow(["value"])  # header
-    for o in outputs:
-        writer.writerow([o])
+
+HEADER = [f"smi_{x}" for x in range(num_input_smiles * batch_size)]
+
+with open(output_file, "w", newline="") as fp:
+    csv_writer = csv.writer(fp)
+    # First Row: Header
+    # Second Row: Generated Smiles (Output)
+    csv_writer.writerows([HEADER, flatten_outputs])
+
+
+if is_debug:
+    with open(os.path.abspath(log_file), "w", newline="\n") as fp:
+        json.dump(log, fp)
