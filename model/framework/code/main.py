@@ -54,13 +54,14 @@ output_len = len(outputs)
 assert input_len == output_len
 
 
-HEADER = [f"smi_{x}" for x in range(num_input_smiles * batch_size)]
+HEADER = [f"smi_{x}" for x in range(batch_size)]
 
 with open(output_file, "w", newline="") as fp:
     csv_writer = csv.writer(fp)
     # First Row: Header
-    # Second Row: Generated Smiles (Output)
-    csv_writer.writerows([HEADER, flatten_outputs])
+    # Second Row onwards: Generated Smiles (Output)
+    csv_writer.writerows([HEADER])
+    csv_writer.writerows(outputs)
 
 
 if is_debug:
