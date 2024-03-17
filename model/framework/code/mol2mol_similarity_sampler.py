@@ -23,8 +23,8 @@ class Mol2MolSimilaritySampler:
     CHECKPOINT = os.path.join(ROOT, "..", "..", "checkpoints")
     MODEL = os.path.realpath(os.path.join(CHECKPOINT, "mol2mol_similarity.prior"))
 
-    def __init__(self):
-        self.batch_size = 100
+    def __init__(self, bach_size):
+        self.batch_size = bach_size
         self.chemistry = ChemistryHelpers(
             Conversions(), BondMaker(), AttachmentPoints()
         )
