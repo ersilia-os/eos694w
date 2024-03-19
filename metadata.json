@@ -26,5 +26,9 @@
     "Publication": "https://chemrxiv.org/engage/chemrxiv/article-details/65463cafc573f893f1cae33a",
     "Source Code": "https://github.com/MolecularAI/REINVENT4",
     "License": "Apache-2.0",
-    "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos694w.zip"
+    "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos694w.zip",
+    "DockerHub": "https://hub.docker.com/r/ersiliaos/eos694w",
+    "Docker Architecture": [
+        "AMD64"
+    ]
 }

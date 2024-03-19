@@ -26,6 +26,7 @@ The Mol2MolMediumSimilarity leverages REINVENT4's `mol2mol_medium_similarity.pri
 ## Ersilia model URLs
 * [GitHub](https://github.com/ersilia-os/eos694w)
 * [AWS S3](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos694w.zip)
+* [DockerHub](https://hub.docker.com/r/ersiliaos/eos694w) (AMD64)
 
 ## Citation
 
