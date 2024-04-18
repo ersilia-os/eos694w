@@ -1,7 +1,7 @@
 {
     "Identifier": "eos694w",
     "Slug": "reinvent4-mol2mol-medium-similarity",
-    "Status": "In progress",
+    "Status": "Ready",
     "Title": "REINVENT 4 Mol2MolMediumSimilarity",
     "Description": "The Mol2MolMediumSimilarity leverages REINVENT4's `mol2mol_medium_similarity.prior` to generate approximately 100 unique molecules. The generated molecules will be relatively similar to the input molecule.",
     "Mode": "Pretrained",
