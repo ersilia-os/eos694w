@@ -7,17 +7,12 @@ RUN pip install tensorboardx==2.0
 RUN pip install chemprop==1.5.2
 RUN pip install tensorboard==2.11.0
 
-# Clean up the temporary directory
-RUN rm -rf /reinvent4
-
-# Making new directory
-RUN mkdir /reinvent4
-
-# Clone the repository and checkout the desired commit
-RUN cd /reinvent4 && git clone --branch v4.2.6 --single-branch https://github.com/MolecularAI/REINVENT4 .
+# Clone the repository
+RUN git clone --branch v4.2.6 --single-branch https://github.com/MolecularAI/REINVENT4
 
 # Install the package using pip
-RUN pip install /reinvent4 --extra-index-url=https://pypi.anaconda.org/OpenEye/simple --extra-index-url=https://download.pytorch.org/whl/cu113
+RUN pip install ./reinvent4 --extra-index-url=https://pypi.anaconda.org/OpenEye/simple --extra-index-url=https://download.pytorch.org/whl/cu113
+
 RUN conda install -c conda-forge xorg-libxrender xorg-libxtst
 
 WORKDIR /repo
