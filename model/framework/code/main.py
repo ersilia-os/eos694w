@@ -42,7 +42,7 @@ if not os.path.exists(os.path.dirname(os.path.abspath(output_file))):
         )
     )
 
-mol2mol_similarity = Mol2MolSimilaritySampler()
+mol2mol_similarity = Mol2MolSimilaritySampler(batch_size)
 
 outputs, flatten_outputs, log = mol2mol_similarity.generate(
     input_smiles=input_smiles, is_debug=is_debug
