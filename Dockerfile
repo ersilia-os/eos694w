@@ -6,12 +6,7 @@ RUN pip install protobuf==3.18.3
 RUN pip install tensorboardx==2.0
 RUN pip install chemprop==1.5.2
 RUN pip install tensorboard==2.11.0
-
-# Clone the repository
-RUN git clone --branch v4.2.6 --single-branch https://github.com/MolecularAI/REINVENT4
-
-# Install the package using pip
-RUN pip install ./REINVENT4 --extra-index-url=https://pypi.anaconda.org/OpenEye/simple --extra-index-url=https://download.pytorch.org/whl/cu113
+RUN pip install git+https://github.com/MolecularAI/REINVENT4 --extra-index-url https://pypi.anaconda.org/OpenEye/simple --extra-index-url https://download.pytorch.org/whl/cu113
    
 WORKDIR /repo
 COPY . /repo
