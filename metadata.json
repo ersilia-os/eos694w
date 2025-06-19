@@ -3,21 +3,18 @@
     "Slug": "reinvent4-mol2mol-medium-similarity",
     "Status": "Ready",
     "Title": "REINVENT 4 Mol2MolMediumSimilarity",
-    "Description": "The Mol2Mol Medium Similarity option of REINVENT4 generates a diverse set of approximately 100 novel small molecules. These generated molecules are designed to retain a moderate level of structural and chemical similarity to the input compound, enabling scaffold exploration while preserving key pharmacophoric or functional features. This approach is particularly useful for hit expansion, analog generation, and chemical space exploration tasks in early-stage drug discovery workflows.\n",
+    "Description": "The Mol2Mol Medium Similarity option of REINVENT4 generates a diverse set of approximately 100 novel small molecules. These generated molecules are designed to retain a moderate level of structural and chemical similarity to the input compound, enabling scaffold exploration while preserving key pharmacophoric or functional features. This approach is particularly useful for hit expansion, analog generation, and chemical space exploration tasks in early-stage drug discovery workflows.",
+    "Deployment": [
+        "Local"
+    ],
     "Source": "Local",
     "Source Type": "External",
+    "Task": "Sampling",
+    "Subtask": "Generation",
     "Input": [
         "Compound"
     ],
     "Input Dimension": 1,
-    "Task": "Sampling",
-    "Subtask": "Generation",
-    "Biomedical Area": [
-        "Any"
-    ],
-    "Target Organism": [
-        "Not Applicable"
-    ],
     "Output": [
         "Compound"
     ],
@@ -27,19 +24,24 @@
     "Tag": [
         "Similarity"
     ],
-    "Publication": "https://chemrxiv.org/engage/chemrxiv/article-details/65463cafc573f893f1cae33a",
+    "Biomedical Area": [
+        "Any"
+    ],
+    "Target Organism": [
+        "Not Applicable"
+    ],
     "Publication Type": "Preprint",
     "Publication Year": 2023,
+    "Publication": "https://chemrxiv.org/engage/chemrxiv/article-details/65463cafc573f893f1cae33a",
     "Source Code": "https://github.com/MolecularAI/REINVENT4",
     "License": "Apache-2.0",
     "Contributor": "ankitskvmdam",
     "Incorporation Date": "2024-02-07",
+    "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos694w.zip",
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos694w",
     "Docker Architecture": [
         "AMD64"
     ],
-    "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos694w.zip",
-    "Deployment": [
-        "Local"
-    ]
+    "Model Size": 232.0,
+    "Environment Size": 6290.0
 }
