@@ -40,8 +40,15 @@
     "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos694w.zip",
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos694w",
     "Docker Architecture": [
-        "AMD64"
+        "AMD64",
+        "ARM64"
     ],
     "Model Size": 232.0,
-    "Environment Size": 6290.0
+    "Environment Size": 6290.0,
+    "Image Size": 6356.62,
+    "Computational Performance 1": 35.11,
+    "Computational Performance 2": 97.87,
+    "Computational Performance 3": 776.08,
+    "Computational Performance 4": -1.0,
+    "Computational Performance 5": -1.0
 }
