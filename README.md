@@ -44,13 +44,18 @@ _10 of 100 columns are shown_
 - **Source:** `Local`
 - **Source Type:** `External`
 - **DockerHub**: [https://hub.docker.com/r/ersiliaos/eos694w](https://hub.docker.com/r/ersiliaos/eos694w)
-- **Docker Architecture:** `AMD64`
+- **Docker Architecture:** `AMD64`, `ARM64`
 - **S3 Storage**: [https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos694w.zip](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos694w.zip)
 
 ### Resource Consumption
 - **Model Size (Mb):** `232`
 - **Environment Size (Mb):** `6290`
+- **Image Size (Mb):** `6356.62`
 
+**Computational Performance (seconds):**
+- 10 inputs: `35.11`
+- 100 inputs: `776.08`
+- 10000 inputs: `-1`
 
 ### References
 - **Source Code**: [https://github.com/MolecularAI/REINVENT4](https://github.com/MolecularAI/REINVENT4)
