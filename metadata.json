@@ -3,32 +3,43 @@
     "Slug": "reinvent4-mol2mol-medium-similarity",
     "Status": "Ready",
     "Title": "REINVENT 4 Mol2MolMediumSimilarity",
-    "Description": "The Mol2MolMediumSimilarity leverages REINVENT4's `mol2mol_medium_similarity.prior` to generate approximately 100 unique molecules. The generated molecules will be relatively similar to the input molecule.",
-    "Mode": "Pretrained",
-    "Task": [
-        "Generative"
-    ],
+    "Description": "The Mol2Mol Medium Similarity option of REINVENT4 generates a diverse set of approximately 100 novel small molecules. These generated molecules are designed to retain a moderate level of structural and chemical similarity to the input compound, enabling scaffold exploration while preserving key pharmacophoric or functional features. This approach is particularly useful for hit expansion, analog generation, and chemical space exploration tasks in early-stage drug discovery workflows.\n",
+    "Source": "Local",
+    "Source Type": "External",
     "Input": [
         "Compound"
     ],
-    "Input Shape": "Single",
+    "Input Dimension": 1,
+    "Task": "Sampling",
+    "Subtask": "Generation",
+    "Biomedical Area": [
+        "Any"
+    ],
+    "Target Organism": [
+        "Not Applicable"
+    ],
     "Output": [
         "Compound"
     ],
-    "Output Type": [
-        "String"
-    ],
-    "Output Shape": "List",
-    "Interpretation": "Model generates ~100 similar molecules per input molecule.",
+    "Output Dimension": 100,
+    "Output Consistency": "Variable",
+    "Interpretation": "Model generates up to 100 similar molecules per input molecule.",
     "Tag": [
         "Similarity"
     ],
     "Publication": "https://chemrxiv.org/engage/chemrxiv/article-details/65463cafc573f893f1cae33a",
+    "Publication Type": "Preprint",
+    "Publication Year": 2023,
     "Source Code": "https://github.com/MolecularAI/REINVENT4",
     "License": "Apache-2.0",
-    "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos694w.zip",
+    "Contributor": "ankitskvmdam",
+    "Incorporation Date": "2024-02-07",
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos694w",
     "Docker Architecture": [
         "AMD64"
+    ],
+    "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos694w.zip",
+    "Deployment": [
+        "Local"
     ]
 }
