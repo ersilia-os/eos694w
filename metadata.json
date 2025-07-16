@@ -37,18 +37,16 @@
     "License": "Apache-2.0",
     "Contributor": "ankitskvmdam",
     "Incorporation Date": "2024-02-07",
+    "Last Packaging Date": "2025-07-16",
     "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos694w.zip",
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos694w",
-    "Docker Architecture": [
-        "AMD64",
-        "ARM64"
-    ],
+    "Docker Architecture": "AMD64",
     "Model Size": 232.0,
     "Environment Size": 8349.0,
-    "Image Size": 6356.62,
-    "Computational Performance 1": 35.11,
-    "Computational Performance 2": 97.87,
-    "Computational Performance 3": 776.08,
+    "Image Size": 8421.59,
+    "Computational Performance 1": 85.78,
+    "Computational Performance 2": 1504.29,
+    "Computational Performance 3": -1.0,
     "Computational Performance 4": -1.0,
     "Computational Performance 5": -1.0
 }
