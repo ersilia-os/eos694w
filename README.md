@@ -4,6 +4,7 @@ The Mol2Mol Medium Similarity option of REINVENT4 generates a diverse set of app
 
 This model was incorporated on 2024-02-07.
 
+
 ## Information
 ### Identifiers
 - **Ersilia Identifier:** `eos694w`
@@ -13,7 +14,7 @@ This model was incorporated on 2024-02-07.
 - **Task:** `Sampling`
 - **Subtask:** `Generation`
 - **Biomedical Area:** `Any`
-- **Target Organism:** `Not Applicable`
+- **Target Organism:** `Any`
 - **Tags:** `Similarity`
 
 ### Input
