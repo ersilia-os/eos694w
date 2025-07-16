@@ -2,8 +2,7 @@
 
 The Mol2Mol Medium Similarity option of REINVENT4 generates a diverse set of approximately 100 novel small molecules. These generated molecules are designed to retain a moderate level of structural and chemical similarity to the input compound, enabling scaffold exploration while preserving key pharmacophoric or functional features. This approach is particularly useful for hit expansion, analog generation, and chemical space exploration tasks in early-stage drug discovery workflows.
 
-This model was incorporated on 2024-02-07.
-
+This model was incorporated on 2024-02-07.Last packaged on 2025-07-16.
 
 ## Information
 ### Identifiers
@@ -45,17 +44,17 @@ _10 of 100 columns are shown_
 - **Source:** `Local`
 - **Source Type:** `External`
 - **DockerHub**: [https://hub.docker.com/r/ersiliaos/eos694w](https://hub.docker.com/r/ersiliaos/eos694w)
-- **Docker Architecture:** `AMD64`, `ARM64`
+- **Docker Architecture:** `AMD64`
 - **S3 Storage**: [https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos694w.zip](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos694w.zip)
 
 ### Resource Consumption
 - **Model Size (Mb):** `232`
 - **Environment Size (Mb):** `8349`
-- **Image Size (Mb):** `6356.62`
+- **Image Size (Mb):** `8421.59`
 
 **Computational Performance (seconds):**
-- 10 inputs: `35.11`
-- 100 inputs: `776.08`
+- 10 inputs: `85.78`
+- 100 inputs: `-1`
 - 10000 inputs: `-1`
 
 ### References
