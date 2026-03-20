@@ -2,7 +2,7 @@
 
 The Mol2Mol Medium Similarity option of REINVENT4 generates a diverse set of approximately 100 novel small molecules. These generated molecules are designed to retain a moderate level of structural and chemical similarity to the input compound, enabling scaffold exploration while preserving key pharmacophoric or functional features. This approach is particularly useful for hit expansion, analog generation, and chemical space exploration tasks in early-stage drug discovery workflows.
 
-This model was incorporated on 2024-02-07.Last packaged on 2026-02-05.
+This model was incorporated on 2024-02-07.Last packaged on 2026-03-20.
 
 ## Information
 ### Identifiers
@@ -50,10 +50,10 @@ _10 of 100 columns are shown_
 ### Resource Consumption
 - **Model Size (Mb):** `233`
 - **Environment Size (Mb):** `2368`
-- **Image Size (Mb):** `2554.15`
+- **Image Size (Mb):** `2555.01`
 
 **Computational Performance (seconds):**
-- 10 inputs: `86.12`
+- 10 inputs: `88.28`
 - 100 inputs: `-1`
 - 10000 inputs: `-1`
 
