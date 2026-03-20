@@ -70,55 +70,53 @@ class Mol2MolSimilaritySampler:
             )
             click.echo(f"Total input smiles: {num_input_smiles}")
 
-        with torch.no_grad():
-            sampled = self.sampler.sample(input_smiles)
-            end_time = time.time()
+        output_smiles = []
+        total_smiles = 0
 
-            if is_debug:
-                click.echo(
-                    click.style(
-                        f"Time taken in seconds: {int(end_time - start_time)}",
-                        fg="green",
-                    )
+        for smi in input_smiles:
+            try:
+                with torch.no_grad():
+                    sampled = self.sampler.sample([smi])
+
+                _, valid_idxs = self.chemistry.conversions.smiles_to_mols_and_indices(
+                    sampled.items2
                 )
+                valid_scores = self.sampler.calculate_tanimoto([smi], sampled.items2)
+                scores = [-1] * len(sampled.items2)
+                for i, j in enumerate(valid_idxs):
+                    scores[j] = valid_scores[i]
 
-        # compute Tanimoto similarity between generated compounds and input compounds; return largest
-        _, valid_idxs = self.chemistry.conversions.smiles_to_mols_and_indices(
-            sampled.items2
-        )
-        valid_scores = self.sampler.calculate_tanimoto(input_smiles, sampled.items2)
-        scores = [-1] * len(sampled.items2)
-        for i, j in enumerate(valid_idxs):
-            scores[j] = valid_scores[i]
+                sampled, scores = sort_sampled_molecules(sampled, scores)
+                sampled = filter_valid(sampled)
+                sampled = filter_out_duplicate_molecules(sampled, is_debug=is_debug)
+                total_smiles += len(sampled.smilies)
 
-        sampled, scores = sort_sampled_molecules(sampled, scores)
+                padded = pad_smiles(sampled, input_smiles=[smi], target_length=self.batch_size)
+                output_smiles.append(padded)
+            except Exception:
+                output_smiles.append([None] * self.batch_size)
 
-        sampled = filter_valid(sampled)
-        sampled = filter_out_duplicate_molecules(sampled, is_debug=is_debug)
-
-        total_smiles = len(sampled.smilies)
-
-        expected_num_smiles = self.batch_size * num_input_smiles
+        end_time = time.time()
 
         if is_debug:
             click.echo(
                 click.style(
-                    f"Total unique smiles generated: {total_smiles}, Expected: {expected_num_smiles}, Loss: {expected_num_smiles - total_smiles}"
+                    f"Time taken in seconds: {int(end_time - start_time)}",
+                    fg="green",
                 )
             )
-
-        flatten_outputs = pad_smiles(
-            sampled, input_smiles=input_smiles, target_length=self.batch_size
-        )
-
-        output_smiles = make_list_into_lists_of_n(flatten_outputs, num_input_smiles)
+            click.echo(
+                click.style(
+                    f"Total unique smiles generated: {total_smiles}, Expected: {self.batch_size * num_input_smiles}, Loss: {self.batch_size * num_input_smiles - total_smiles}"
+                )
+            )
 
         log = {
             "start": start_time,
             "end": end_time,
             "input_smiles": input_smiles,
             "total": total_smiles,
-            "expected": expected_num_smiles,
+            "expected": self.batch_size * num_input_smiles,
         }
 
-        return (output_smiles, flatten_outputs, log)
+        return (output_smiles, [], log)
