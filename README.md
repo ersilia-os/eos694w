@@ -59,8 +59,8 @@ _10 of 100 columns are shown_
 
 ### References
 - **Source Code**: [https://github.com/MolecularAI/REINVENT4](https://github.com/MolecularAI/REINVENT4)
-- **Publication**: [https://chemrxiv.org/engage/chemrxiv/article-details/65463cafc573f893f1cae33a](https://chemrxiv.org/engage/chemrxiv/article-details/65463cafc573f893f1cae33a)
-- **Publication Type:** `Preprint`
+- **Publication**: [https://doi.org/10.1186/s13321-024-00812-5](https://doi.org/10.1186/s13321-024-00812-5)
+- **Publication Type:** `Peer reviewed`
 - **Publication Year:** `2023`
 - **Ersilia Contributor:** [ankitskvmdam](https://github.com/ankitskvmdam)
 
