@@ -22,7 +22,7 @@ This model was incorporated on 2024-02-07.Last packaged on 2026-03-20.
 
 ### Output
 - **Output Dimension:** `100`
-- **Output Consistency:** `Variable`
+- **Output Consistency:** `Fixed`
 - **Interpretation:** Model generates up to 100 similar molecules per input molecule.
 
 Below are the **Output Columns** of the model:
