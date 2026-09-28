@@ -19,7 +19,7 @@
         "Compound"
     ],
     "Output Dimension": 100,
-    "Output Consistency": "Variable",
+    "Output Consistency": "Fixed",
     "Interpretation": "Model generates up to 100 similar molecules per input molecule.",
     "Tag": [
         "Similarity"

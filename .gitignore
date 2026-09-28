@@ -77,6 +77,10 @@ target/
 # Jupyter Notebook
 .ipynb_checkpoints
 
+# eosvc-managed model assets (see access.json)
+model/checkpoints/
+model/framework/fit/
+
 # IPython
 profile_default/
 ipython_config.py
