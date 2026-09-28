@@ -37,7 +37,7 @@ RUN pip install pathos==0.3.2
 RUN pip install git+https://github.com/MolecularAI/REINVENT4@v4.2.6 --no-deps --extra-index-url https://pypi.anaconda.org/OpenEye/simple
 RUN pip install pandas==2.3.3
 RUN pip install pydantic==2.12.5
-RUN pip install typing_extensions==4.15.0
+RUN pip install typing_extensions==4.16.0
 
 WORKDIR /repo
 COPY . /repo
