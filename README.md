@@ -1,6 +1,6 @@
 # REINVENT 4 Mol2MolMediumSimilarity
 
-Produces about 100 novel structures bearing moderate similarity to a query molecule, populating the space around a starting point without straying far from it. A medium-similarity Mol2Mol prior from REINVENT 4 drives the generation, one of several transformer-based priors in an open framework that also supports linker design, scaffold hopping and R-group replacement. Decoding uses beam search rather than random sampling, so a given input always returns the same set, which still needs filtering for novelty and synthetic feasibility.
+Produces up to 100 novel structures of moderate similarity to a query molecule, populating the space around a starting point without straying far from it. A similarity-trained Mol2Mol prior from REINVENT 4 drives the generation, one of several transformer priors in an open framework that also supports linker design, scaffold hopping and R-group replacement. The prior is sampled at random, so repeated runs return different sets; sampling is repeated up to a limit until 100 distinct structures are collected. The query and its stereoisomers are discarded.
 
 This model was incorporated on 2024-02-07.Last packaged on 2026-10-23.
 
@@ -22,8 +22,8 @@ This model was incorporated on 2024-02-07.Last packaged on 2026-10-23.
 
 ### Output
 - **Output Dimension:** `100`
-- **Output Consistency:** `Fixed`
-- **Interpretation:** Up to 100 generated molecules of moderate structural similarity to the input compound.
+- **Output Consistency:** `Variable`
+- **Interpretation:** Up to 100 sampled molecules of moderate structural similarity to the input compound; sets differ between runs.
 
 Below are the **Output Columns** of the model:
 | Name | Type | Direction | Description |
