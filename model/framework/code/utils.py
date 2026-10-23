@@ -28,6 +28,15 @@ def are_smiles_same(smiles1: str, smiles2: str) -> bool:
     return similarity == 1.0
 
 
+def is_same_2d_structure(smiles1: str, smiles2: str) -> bool:
+    """True if both SMILES are the same molecule once stereochemistry is ignored (canonical SMILES compared)."""
+    mol1 = Chem.MolFromSmiles(smiles1)
+    mol2 = Chem.MolFromSmiles(smiles2)
+    if mol1 is None or mol2 is None:
+        return False
+    return Chem.MolToSmiles(mol1, isomericSmiles=False) == Chem.MolToSmiles(mol2, isomericSmiles=False)
+
+
 def sort_sampled_molecules(
     sampled: SampleBatch, scores: list[float]
 ) -> tuple[SampleBatch, list[float]]:
@@ -61,13 +70,9 @@ def filter_out_duplicate_molecules(sampled: SampleBatch, is_debug: bool) -> Samp
     The `seen[item1] = item1` line only catches an output that matches the input's
     SMILES string byte-for-byte; REINVENT4 frequently re-writes the input into an
     equivalent but differently-formatted SMILES (see the comment in `pad_smiles`),
-    so a structurally-identical echo with a different string passes through
-    uncaught. This exact gap was found and fixed in the sibling eos57bx model
-    (which shares this file almost verbatim, wrapping a different REINVENT4
-    prior) via a benchmark run that caught 2/487 echoed outputs for one compound;
-    ported here on the same reasoning, since the underlying bug is identical.
-    `are_smiles_same` (structural, ignores stereochemistry, already used
-    elsewhere in this file) closes the gap.
+    and also returns stereoisomers of the input, so an echo with a different
+    string passes through. `is_same_2d_structure` compares the canonical SMILES
+    without stereochemistry and drops such outputs.
     """
 
     seen = {}
@@ -91,6 +96,16 @@ def filter_out_duplicate_molecules(sampled: SampleBatch, is_debug: bool) -> Samp
                 click.echo(
                     click.style(
                         f"Removing {smile}, as it is a duplicate entry.", fg="yellow"
+                    )
+                )
+            continue
+
+        if is_same_2d_structure(smile, item1):
+            if is_debug:
+                click.echo(
+                    click.style(
+                        f"Removing {smile}, as it is the input without stereochemistry.",
+                        fg="yellow",
                     )
                 )
             continue
