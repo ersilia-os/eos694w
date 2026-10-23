@@ -2,7 +2,7 @@
 
 Produces about 100 novel structures bearing moderate similarity to a query molecule, populating the space around a starting point without straying far from it. A medium-similarity Mol2Mol prior from REINVENT 4 drives the generation, one of several transformer-based priors in an open framework that also supports linker design, scaffold hopping and R-group replacement. Decoding uses beam search rather than random sampling, so a given input always returns the same set, which still needs filtering for novelty and synthetic feasibility.
 
-This model was incorporated on 2024-02-07.Last packaged on 2026-03-20.
+This model was incorporated on 2024-02-07.Last packaged on 2026-10-23.
 
 ## Information
 ### Identifiers
@@ -44,16 +44,16 @@ _10 of 100 columns are shown_
 - **Source:** `Local`
 - **Source Type:** `External`
 - **DockerHub**: [https://hub.docker.com/r/ersiliaos/eos694w](https://hub.docker.com/r/ersiliaos/eos694w)
-- **Docker Architecture:** `AMD64`
+- **Docker Architecture:** `AMD64`, `ARM64`
 - **S3 Storage**: [https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos694w.zip](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos694w.zip)
 
 ### Resource Consumption
 - **Model Size (Mb):** `233`
 - **Environment Size (Mb):** `2367`
-- **Image Size (Mb):** `2555.01`
+- **Image Size (Mb):** `2500.58`
 
 **Computational Performance (seconds):**
-- 10 inputs: `88.28`
+- 10 inputs: `84.66`
 - 100 inputs: `-1`
 - 10000 inputs: `-1`
 
