@@ -7,7 +7,7 @@ import json
 import click
 from reinvent.config_parse import read_smiles_csv_file
 
-from mol2mol_similarity_sampler import Mol2MolSimilaritySampler
+from mol2mol_similarity_sampler import Mol2MolSimilaritySampler, N_OUTPUTS
 
 # parse arguments
 input_file = sys.argv[1]
@@ -22,14 +22,10 @@ is_debug = sys.argv[3] == "True" if len(sys.argv) > 3 else False
 log_file = output_file + ".json"
 
 
-batch_size = 100
-num_input_smiles = 0
 input_smiles = None
-
 
 if os.path.exists(input_file):
     input_smiles = read_smiles_csv_file(input_file, columns=0, header=True)
-    num_input_smiles = len(input_smiles)
 
 else:
     click.echo(click.style(f"[INPUT_FILE]: {input_file} doesn't exist.", fg="red"))
@@ -42,9 +38,9 @@ if not os.path.exists(os.path.dirname(os.path.abspath(output_file))):
         )
     )
 
-mol2mol_similarity = Mol2MolSimilaritySampler(batch_size)
+mol2mol_similarity = Mol2MolSimilaritySampler()
 
-outputs, flatten_outputs, log = mol2mol_similarity.generate(
+outputs, _, log = mol2mol_similarity.generate(
     input_smiles=input_smiles, is_debug=is_debug
 )
 
@@ -54,7 +50,7 @@ output_len = len(outputs)
 assert input_len == output_len
 
 
-HEADER = ["smi_{0}".format(str(x).zfill(2)) for x in range(batch_size)]
+HEADER = ["smi_{0}".format(str(x).zfill(2)) for x in range(N_OUTPUTS)]
 
 with open(output_file, "w", newline="") as fp:
     csv_writer = csv.writer(fp)
