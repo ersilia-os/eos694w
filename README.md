@@ -23,7 +23,7 @@ This model was incorporated on 2024-02-07.Last packaged on 2026-10-24.
 ### Output
 - **Output Dimension:** `100`
 - **Output Consistency:** `Variable`
-- **Interpretation:** Up to 100 sampled molecules of moderate structural similarity to the input compound; sets differ between runs.
+- **Interpretation:** Up to 100 sampled molecules of moderate structural similarity to the input compound, listed from most to least similar (Morgan Tanimoto); sets differ between runs.
 
 Below are the **Output Columns** of the model:
 | Name | Type | Direction | Description |
