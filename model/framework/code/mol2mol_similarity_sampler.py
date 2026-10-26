@@ -1,9 +1,11 @@
 import os
+import random
 import sys
 import time
 
 import torch
-from rdkit import Chem
+from rdkit import Chem, DataStructs
+from rdkit.Chem import rdFingerprintGenerator
 from reinvent.runmodes import samplers, create_adapter
 from reinvent.runmodes.dtos import ChemistryHelpers
 from reinvent.chemistry import TransformationTokens, Conversions
@@ -16,6 +18,20 @@ N_OUTPUTS = 100  # columns of run_columns.csv
 DRAWS_PER_ROUND = 150  # sequences drawn by one call of the sampler
 MAX_ROUNDS = 5  # give up on an input after this many rounds
 TEMPERATURE = 1.0  # REINVENT 4's default for sampling
+FP_GENERATOR = rdFingerprintGenerator.GetMorganGenerator(radius=2, fpSize=2048)
+
+
+def rank_by_similarity(query: str, smiles: "list[str]") -> "list[str]":
+    """`smiles` from the most to the least similar to `query`.
+
+    Similarity is the Tanimoto index of Morgan fingerprints (radius 2, 2048 bits); equal
+    scores keep their order.
+    """
+    query_fp = FP_GENERATOR.GetFingerprint(Chem.MolFromSmiles(query))
+    fps = [FP_GENERATOR.GetFingerprint(Chem.MolFromSmiles(smile)) for smile in smiles]
+    scores = DataStructs.BulkTanimotoSimilarity(query_fp, fps)
+    order = sorted(range(len(smiles)), key=scores.__getitem__, reverse=True)
+    return [smiles[i] for i in order]
 
 
 class Mol2MolSimilaritySampler:
@@ -23,8 +39,9 @@ class Mol2MolSimilaritySampler:
 
     Each round draws DRAWS_PER_ROUND sequences by multinomial sampling (unseeded, so every call
     gives a different set). Rounds are repeated until N_OUTPUTS distinct molecules that are not the
-    input (stereochemistry ignored) are collected, or MAX_ROUNDS is reached; the row is then
-    padded with empty cells. Nothing is ranked: the molecules stay in draw order.
+    input (stereochemistry ignored) are collected, or MAX_ROUNDS is reached. If more than N_OUTPUTS
+    were collected, N_OUTPUTS are picked at random. The row is sorted from the most to the least
+    similar to the input (Tanimoto) and padded with empty cells.
     """
 
     ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -49,7 +66,7 @@ class Mol2MolSimilaritySampler:
         )
 
     def sample_one(self, smiles: str) -> "list[str]":
-        """Up to N_OUTPUTS distinct analogues of `smiles`, in draw order."""
+        """Up to N_OUTPUTS distinct analogues of `smiles`, the most similar first."""
         pool = {}
         for _ in range(MAX_ROUNDS):
             with torch.no_grad():
@@ -62,7 +79,8 @@ class Mol2MolSimilaritySampler:
                 pool.setdefault(Chem.MolToSmiles(mol), None)
             if len(pool) >= N_OUTPUTS:
                 break
-        return list(pool)[:N_OUTPUTS]
+        picked = random.sample(list(pool), min(N_OUTPUTS, len(pool)))
+        return rank_by_similarity(smiles, picked)
 
     def generate(
         self, input_smiles: "list[str]", is_debug: bool

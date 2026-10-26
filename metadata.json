@@ -20,7 +20,7 @@
     ],
     "Output Dimension": 100,
     "Output Consistency": "Variable",
-    "Interpretation": "Up to 100 sampled molecules of moderate structural similarity to the input compound; sets differ between runs.",
+    "Interpretation": "Up to 100 sampled molecules of moderate structural similarity to the input compound, listed from most to least similar (Morgan Tanimoto); sets differ between runs.",
     "Tag": [
         "Similarity"
     ],
