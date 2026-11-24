@@ -3,7 +3,7 @@
 Produces up to 100 novel structures of moderate similarity to a query molecule, populating the space around a starting point without straying far from it. A similarity-trained Mol2Mol prior from REINVENT 4 drives the generation, one of several transformer priors in an open framework that also supports linker design, scaffold hopping and R-group replacement. The prior is sampled at random, so repeated runs return different sets; sampling is repeated up to a limit until 100 distinct structures are collected. The query and its stereoisomers are discarded.
 
 This model was incorporated on 2024-02-07.
-Last packaged on 2026-10-26.
+Last packaged on 2026-11-24.
 
 ## Information
 ### Identifiers
@@ -52,10 +52,10 @@ _10 of 100 columns are shown_
 ### Resource Consumption
 - **Model Size (Mb):** `233`
 - **Environment Size (Mb):** `2446`
-- **Image Size (Mb):** `2501.05`
+- **Image Size (Mb):** `907.39`
 
 **Computational Performance (seconds):**
-- 10 inputs: `138.72`
+- 10 inputs: `102.54`
 - 100 inputs: `-1`
 - 10000 inputs: `-1`
 
