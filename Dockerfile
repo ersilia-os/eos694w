@@ -3,8 +3,8 @@ MAINTAINER ersilia
 
 RUN python -m pip install --upgrade pip
 
-RUN pip install torch==1.12.1 --index-url https://download.pytorch.org/whl/cpu
-RUN pip install torchvision==0.13.1 --index-url https://download.pytorch.org/whl/cpu
+RUN pip install torch==2.4.1 --index-url https://download.pytorch.org/whl/cpu
+RUN pip install torchvision==0.19.1 --index-url https://download.pytorch.org/whl/cpu
 
 RUN pip install OpenEye-toolkits==2025.2.1 --extra-index-url https://pypi.anaconda.org/OpenEye/simple
 RUN pip install chemprop==1.5.2 --extra-index-url https://pypi.anaconda.org/OpenEye/simple
