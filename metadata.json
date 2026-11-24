@@ -47,7 +47,7 @@
     ],
     "Apptainer": "https://models-sif.s3.eu-north-1.amazonaws.com/eos694w_v2.sif",
     "Model Size": 233.0,
-    "Environment Size": 2368.0,
+    "Environment Size": 2446.0,
     "Image Size": 2501.05,
     "Computational Performance 1": 138.72,
     "Computational Performance 2": 1560.81,
